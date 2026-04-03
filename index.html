@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Melomaniac</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <!-- <body class="dark">add/remove "dark" to switch -->
+  <body>
+    <input type="checkbox" id="theme-toggle" hidden />
+
+    <div class="app-container">
+      <header>
+        <h1>Melomaniac</h1>
+        <p>Ur Music Destination</p>
+      </header>
+
+      <!-- Navigation -->
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#popular">Music</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#login">Login</a></li>
+        </ul>
+
+        <label for="theme-toggle" class="toggle-btn"></label>
+      </nav>
+
+      <!-- Hero Section -->
+      <section id="home">
+        <h2>Feel the Music</h2>
+        <p>Stream unlimited audio and video anytime.</p>
+      </section>
+
+      <section id="popular">
+        <h2>Popular Songs</h2>
+        <div class="music-container">
+          <article class="music-card">
+            <h3>Gayatri Mantra...</h3>
+          </article>
+          <article class="music-card">
+            <h3>Om Namah Shiva</h3>
+            <img
+              src="lord shiva.jpeg"
+              alt="Lord Shiva Song Image"
+              width="100"
+            />
+          </article>
+          <article class="music-card">
+            <h3 id="song-title">Lord Buddha Song</h3>
+            <audio id="audio-player" controls>
+              <source src="tibet.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+            <!-- <button onClick="playSong">▶ Play</button>
+            <button onclick="pauseSong">⏸Pause</button> -->
+            <button onclick="prevSong()">⏮ Prev</button>
+            <button onclick="toggleSong()">▶ Play/Pause</button>
+            <button onclick="nextSong()">⏭ Next</button>
+          </article>
+          <article class="music-card">
+            <h3>Nature</h3>
+            <video controls>
+              <source src="nature.mp4" type="video/mp4" />
+              Your browser does not support the video element.
+            </video>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Top Songs</h2>
+        <ol>
+          <li>Song 1</li>
+          <li>Song 2</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>All Songs</h2>
+        <ul>
+          <li>Telugu songs</li>
+          <li>Hindi Songs</li>
+        </ul>
+      </section>
+
+      <section id="login">
+        <h2>Login</h2>
+        <form action="">
+          <div>
+            <label for="email">Email:</label><br />
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div>
+            <label for="password">Password:</label><br />
+            <input type="password" id="password" name="password" required />
+          </div>
+          <br />
+          <button type="submit">Login</button>
+        </form>
+      </section>
+
+      <footer>
+        <p>© 2026 melamaniac.All rights reserved</p>
+      </footer>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>

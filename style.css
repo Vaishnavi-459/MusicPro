@@ -1,0 +1,335 @@
+/* ================= RESET ================= */
+* {
+  margin: 0; /* remove default spacing */
+  padding: 0; /* remove default spacing */
+  box-sizing: border-box; /* include padding + border inside width */
+}
+/* ========================================================= */
+/* 🧠 CSS BASICS (LEARNING - COMMENTED) */
+/* Selectors, Colors */
+/*
+body {
+  background: #f4f4f4;
+  color: #222;
+}
+
+h1 {
+  color: blue;
+}
+*/
+/* ========================================================= */
+
+/* 🧠 BOX MODEL (LEARNING - COMMENTED) */
+/*
+div {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid black;
+}
+*/
+/* ========================================================= */
+
+/* 🧠 FLEXBOX PART 1 (LEARNING - COMMENTED) */
+/*
+.music-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+*/
+/* ========================================================= */
+
+/* 🧠 FLEXBOX PART 2 (LEARNING - COMMENTED) */
+/*
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+/* ========================================================= */
+
+/* 🧠 RESPONSIVE BASICS (LEARNING - COMMENTED) */
+/*
+img {
+  max-width: 100%;
+}
+*/
+/* ========================================================= */
+
+/* 🧠 MEDIA QUERIES (LEARNING - COMMENTED) */
+/*
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+  }
+}
+*/
+/* ========================================================= */
+
+/* 🧠 GRID BASICS (LEARNING - COMMENTED) */
+/*
+.music-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+*/
+/* ========================================================= */
+
+ /* ===VARIABLES [before not applied dark theme]==== */ /* :root { */ /* --primary: #6c63ff; main brand color (used for header, buttons) */ /* --secondary: #4caf50; secondary color (optional usage) */ /* --dark: #222; dark text color */ /* --light: #f4f4f4; background color */ /* } */ /* ================= THEME VARIABLES ================= */ /* LIGHT THEME (DEFAULT) */
+:root {
+  --primary: #6c63ff; /* --secondary:#4CAF50; */
+  --dark: #222; /* text color */
+  --light: #f4f4f4; /* background */
+  --card: #ffffff; /* card background */
+}
+/* 🧠 DARK THEME OLD METHOD (COMMENTED) */
+/*
+body.dark {
+  --primary:#8e85ff;
+  --dark:#f4f4f4;
+  --light:#121212;
+  --card:#1e1e1e;
+}
+*/
+ /* When checkbox checked → apply dark theme */
+ #theme-toggle:checked ~ .app-container {
+  --primary: #8e85ff;
+  --dark: #f4f4f4; /* Dark mode text */
+  --light: #121212; /* Dark mode background */
+  --card: #1e1e1e; /* Dark mode cards */
+} 
+/* DARK THEME (MANUAL TOGGLE) body.dark { --primary:#8e85ff; --secondary:#4CAF50; --dark:#f4f4f4; /*text becomes light*/ /* --light:#121212; dark background */ /* --card:#1e1e1e; dark card */ /* } */ /* AUTO DARK MODE (SYSTEM BASED) */
+@media (prefers-color-scheme: dark) {
+  body:not(.light) {
+    --primary: #8e85ff;
+    --dark: #f4f4f4;
+    --light: #121212;
+    --card: #1e1e1e;
+  }
+} 
+/* ================= BODY ================= */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif; /*modern font*/
+  background: var(
+    --light
+  ); /* dynamic background */ /* color: var(--dark); dynamic text */
+}
+
+/* When checkbox checked → apply dark theme */
+.app-container {
+  background-color: var(--light);
+  color: var(--dark);
+  min-height: 100vh;
+  transition: 0.3s ease; /* Smooth transition for everything */
+} 
+/* ================= 2. CORRECT ICON LOGIC ================= */ /* Default (Light Mode) -> Show Moon */
+.toggle-btn::before {
+  content: "☀️";
+  font-size: 1.5rem;
+  cursor: pointer;
+} 
+/* ================= ICON SWAP ================= */ /* Show Sun when dark mode is on */
+#theme-toggle:checked ~ .app-container .toggle-btn::before {
+  content: "🌙";
+}
+ /* Hide the default moon when sun is shown */
+#theme-toggle:checked ~ .app-container .toggle-btn {
+  font-size: 0; /* hides the text moon */
+}
+#theme-toggle:checked ~ .app-container .toggle-btn::before {
+  font-size: 1.5rem; /* shows the emoji sun */
+}
+ /* --- THEME OVERRIDES FOR HEADER & HERO --- */ 
+ /* When Dark Mode is ON... (Darkmode header override*/
+#theme-toggle:checked ~ .app-container header {
+  background: #1a1a1a; /* Darker header background */ /* border-bottom: 1px solid var(--primary); Optional accent line */
+}
+#theme-toggle:checked ~ .app-container #home {
+  /* Change the gradient to something darker/moodier */
+  background: linear-gradient(
+    to right,
+    #2c2c2c,
+    #1a1a1a
+  ); /* color: var(--dark); Ensures text is visible */
+}
+ /* ================= HEADER ================= */
+header {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 25px;
+  transition: 0.3s;
+}
+ /* ================= NAVBAR ================= */
+nav {
+  background: var(--card); /* dynamic */
+  padding: 15px 30px; /* spacing inside navbar */
+  display: flex; /* enable flex layout */
+  justify-content: space-between; /* space between logo & menu */
+  align-items: center; /* vertically align items */
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
+} 
+/* ================= NAV LIST ================= */
+nav ul {
+  display: flex; /* horizontal menu */
+  list-style: none; /* remove bullets */
+  gap: 25px; /* space between menu items */
+} 
+/* ================= NAV LINKS ================= */
+nav a {
+  text-decoration: none; /* remove underline */
+  color: var(--dark); /* text color */
+  font-weight: 600; /* slightly bold */
+  position: relative; /* required for underline animation */
+} 
+/* ================= NAV HOVER UNDERLINE ================= */
+nav a::after {
+  content: ""; /* empty element */
+  position: absolute;
+  width: 0%; /* hidden initially */
+  height: 2px; /* underline thickness */
+  background: var(--primary); /* underline color */
+  left: 0;
+  bottom: -5px; /* position below text */
+  transition: 0.3s; /* smooth animation */
+}
+nav a:hover::after {
+  width: 100%; /* expand line on hover */
+} 
+/* ================= HERO ================= */ /* FLEXBOX WAY (OLD) */ /* #home { display: flex; justify-content: center; align-items: center; } */ /* GRID WAY (NEW) */ /* --- ENSURE THE HERO SECTION ADAPTS --- */
+#home {
+  display: grid;
+  place-items: center;
+  height: 300px; /* Default Light Mode Gradient */
+  background: linear-gradient(to right, var(--primary), #8e85ff);
+  color: white;
+  text-align: center;
+  transition: 0.3s; /* Smooth color swap */
+} 
+/* ================= SECTIONS ================= */
+section {
+  padding: 50px 20px; /* spacing inside sections */
+  max-width: 1100px; /* max width */
+  margin: auto; /* center section */
+} 
+/* ================= SECTION HEADINGS ================= */
+section h2 {
+  text-align: center;
+  margin-bottom: 30px; /* space below heading */
+}
+ /* ================= MUSIC CONTAINER ================= */ /* FLEXBOX WAY (OLD) */ /* .music-container { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; } */ /* GRID WAY (NEW) */
+.music-container {
+  display: grid; /* grid layout */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* auto-fit → automatic columns minmax → min 250px, max flexible */
+  gap: 25px; /* spacing between cards */
+} 
+/* ================= MUSIC CARD ================= */
+.music-card {
+  background: var(--card); /* works in both modes */
+  padding: 20px; /* inside spacing */ /* flex: 1 1 250px; //responsive width */ /* max-width: 280px; //limit max width */
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* shadow */
+  transition: 0.3s; /* smooth animation */
+} 
+/* ================= CARD HOVER ================= */
+.music-card:hover {
+  transform: translateY(-8px); /* move up */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* deeper shadow */
+} 
+/* ================= IMAGE ================= */
+.music-card img {
+  width: 100%; /* full width */
+  border-radius: 8px; /* rounded image */
+} 
+/* ================= MEDIA ================= */
+audio,
+video {
+  width: 100%; /* full width responsive */
+  margin-top: 10px; /* spacing above */
+}
+ /* ================= LISTS ================= */
+ol,
+ul {
+  margin-top: 10px; /* spacing */
+}
+ /* ================= FORM ================= */
+form {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto; /* center form */
+  display: flex;
+  flex-direction: column; /* vertical layout */
+  gap: 10px; /* spacing between elements */
+} 
+/* ================= INPUT ================= */
+input {
+  background: var(--card);
+  color: var(--dark);
+  border: 1px solid var(--primary);
+} 
+/* ================= INPUT FOCUS ================= */
+input:focus {
+  border-color: var(--primary); /* highlight border */
+  outline: none; /* remove default outline */
+}
+button {
+  padding: 12px;
+  border: none;
+  background: var(--primary); /* primary color */
+  color: white;
+  border-radius: 6px;
+  cursor: pointer; /* transition: 0.3s; smooth hover */
+} /* ================= BUTTON HOVER ================= */
+button:hover {
+  /* background: #574fd6; darker shade */
+  opacity: 0.9;
+} /* FOOTER */
+footer {
+  background: #000;
+  color: white;
+  text-align: center;
+  padding: 20px; /* margin-top: 30px; */
+} /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+  /* NAVBAR → STACK */
+  nav {
+    flex-direction: column; /* stack navbar */ /* gap: 10px; */
+  } /* MENU → VERTICAL */
+  nav ul {
+    flex-direction: column; /* vertical menu */
+  } /* HERO → FLEXIBLE HEIGHT */
+  #home {
+    height: auto; /* avoid fixed height */
+    padding: 30px 10px;
+  } /* SECTION SPACING */
+  section {
+    padding: 30px 10px;
+  } /* FLEXBOX WAY (OLD) */ /* .music-container { flex-direction: column; } */ /* GRID auto handles this 👍 */
+  .music-card {
+    width: 90%;
+    margin: auto;
+  }
+  audio,
+  video {
+    width: 100%;
+  }
+  form {
+    width: 90%;
+  }
+} /* ================= TABLET RESPONSIVE ================= */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* FLEXBOX WAY (OLD) */ /* .music-card { flex: 1 1 45%; } */ /* GRID automatically handles layout */
+} /* ================= LARGE SCREENS ================= */
+@media (min-width: 1025px) {
+  .music-container {
+    justify-content: space-evenly; /* better spacing */
+  }
+}
