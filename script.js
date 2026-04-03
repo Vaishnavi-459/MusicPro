@@ -13,16 +13,16 @@ let isUserLoggedIn = false;
 const songs = [
   {
     title: "Gayatri Mantra",
-    src: "tibet.mp3"
+    src: "tibet.mp3",
   },
   {
     title: "Om Namah Shiva",
-    src: "shiva.mp3"
+    src: "shiva.mp3",
   },
   {
     title: "Nature Sound",
-    src: "nature.mp3"
-  }
+    src: "nature.mp3",
+  },
 ];
 
 let user = {
@@ -31,7 +31,6 @@ let user = {
 };
 
 console.log(songs);
-
 
 //Functions
 const audio = document.getElementById("audio-player");
@@ -52,55 +51,53 @@ const audio = document.getElementById("audio-player");
 //   console.log("paused");
 // }
 // =====================OR=================//
-function toggleSong(){
-  const btn=document.querySelector("button");
-  if(audio.paused){
+function toggleSong() {
+  const btn = document.querySelector("button");
+  if (audio.paused) {
     audio.play();
-    btn.innerText="Pause ⏸";
-  }
-  else{
+    btn.innerText = "Pause ⏸";
+  } else {
     audio.pause();
-    btn.innerText="play ▶";
+    btn.innerText = "play ▶";
   }
 }
 
-let playlist=[
+let playlist = [
   {
-    title:"Gayatri Mantra",
-    file:"tibet.mp3"
+    title: "Gayatri Mantra",
+    file: "tibet.mp3",
   },
   {
-    title:"om namah shivaya",
-    file:"shiva.mp3"
+    title: "om namah shivaya",
+    file: "shiva.mp3",
   },
   {
-    title:"nature sound",
-    file:"nature.mp3"
-  }
-]
-let currentSong=0;
+    title: "nature sound",
+    file: "nature.mp3",
+  },
+];
+let currentSong = 0;
 
-function loadSong(index){
+function loadSong(index) {
   const audio = document.getElementById("audio-player");
   const title = document.getElementById("song-title");
 
-  audio.src=playlist[index].file;
-  title.innerText=playlist[index].title;
+  audio.src = playlist[index].file;
+  title.innerText = playlist[index].title;
 }
 
-function nextSong(){
+function nextSong() {
   currentSong++;
-  if(currentSong>=playlist.length){
-    currentSong=0;
+  if (currentSong >= playlist.length) {
+    currentSong = 0;
   }
   loadSong(currentSong);
 }
 
-function prevSong(){
+function prevSong() {
   currentSong--;
-  if(currentSong<0){
-    currentSong=playlist.length-1;
+  if (currentSong < 0) {
+    currentSong = playlist.length - 1;
   }
   loadSong(currentSong);
 }
-
