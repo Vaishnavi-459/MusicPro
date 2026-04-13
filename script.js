@@ -1,103 +1,134 @@
-//Varibales,Datatypes
-let websiteName = "Melomaniac"; //String
-let songName = "Gayatri Mantra.."; // let example(value can change)
-songName = "Kanchi.. Kamakshi.. Amba..";
+/* ================= VARIABLES & DATA TYPES ================= */
+
+// String → text value
+let websiteName = "Melomaniac";
+
+// let → value can change later
+let songName = "Gayatri Mantra..";
+songName = "Kanchi.. Kamakshi.. Amba.."; // updated value
+
+// Number → numeric value
 let price = 800;
-// const price = 800;// const example (fixed value) //Number
-// price = 1000; // ❌ ERROR
-// var userName = "Guest";// var (not recommended)
+
+// Boolean → true/false
 let isUserLoggedIn = false;
-// ================= PLAYLIST ARRAY =================
-// Array of objects (REAL PROJECT STRUCTURE)
 
-const songs = [
-  {
-    title: "Gayatri Mantra",
-    src: "tibet.mp3",
-  },
-  {
-    title: "Om Namah Shiva",
-    src: "shiva.mp3",
-  },
-  {
-    title: "Nature Sound",
-    src: "nature.mp3",
-  },
-];
 
-let user = {
-  name: "Guest",
-  email: "guest@gmail.com",
-};
-
-console.log(songs);
-
-//Functions
-const audio = document.getElementById("audio-player");
-
-// function playSong(){
-//   audio.play();
-//   console.log("song is playing");
-// }
-// function pauseSong(){
-//   audio.pause();
-//   console.log("song is paused");
-// }
-// =====================OR=================//
-// function toggleSong() {
-//   if (audio.paused) audio.play();
-//   console.log("playing");
-//   if (audio.play) audio.pause();
-//   console.log("paused");
-// }
-// =====================OR=================//
-function toggleSong() {
-  const btn = document.querySelector("button");
-  if (audio.paused) {
-    audio.play();
-    btn.innerText = "Pause ⏸";
-  } else {
-    audio.pause();
-    btn.innerText = "play ▶";
-  }
-}
+/* ================= ARRAY OF OBJECTS (PLAYLIST) ================= */
+// Array → collection of items
+// Object → key:value pair
 
 let playlist = [
   {
-    title: "Gayatri Mantra",
-    file: "tibet.mp3",
+    title: "Gayatri Mantra",   // song name
+    file: "tibet.mp3",         // file path
   },
   {
-    title: "om namah shivaya",
+    title: "Om Namah Shivaya",
     file: "shiva.mp3",
   },
   {
-    title: "nature sound",
+    title: "Nature Sound",
     file: "nature.mp3",
   },
 ];
+
+// Track current song index
 let currentSong = 0;
 
-function loadSong(index) {
-  const audio = document.getElementById("audio-player");
-  const title = document.getElementById("song-title");
 
+/* ================= DOM SELECTION ================= */
+
+// Select audio element using ID
+const audio = document.getElementById("audio-player");
+
+// Select title element
+const title = document.getElementById("song-title");
+
+// Select FIRST button (play button)
+const button = document.querySelector("button");
+
+
+/* ================= FUNCTION → LOAD SONG ================= */
+// Function → reusable block of code
+
+function loadSong(index) {
+  // update audio source
   audio.src = playlist[index].file;
+
+  // update title text
   title.innerText = playlist[index].title;
 }
 
+
+/* ================= FUNCTION → PLAY / PAUSE ================= */
+
+function toggleSong() {
+  // check if audio is paused
+  if (audio.paused) {
+    audio.play(); // play song
+
+    // change button text
+    button.innerText = "Pause ⏸";
+  } else {
+    audio.pause(); // pause song
+
+    // change button text
+    button.innerText = "Play ▶";
+  }
+}
+
+
+/* ================= FUNCTION → NEXT SONG ================= */
+
 function nextSong() {
-  currentSong++;
+  currentSong++; // move forward
+
+  // if reached end → go to first song
   if (currentSong >= playlist.length) {
     currentSong = 0;
   }
-  loadSong(currentSong);
+
+  loadSong(currentSong); // load new song
 }
 
+
+/* ================= FUNCTION → PREVIOUS SONG ================= */
+
 function prevSong() {
-  currentSong--;
+  currentSong--; // move backward
+
+  // if below 0 → go to last song
   if (currentSong < 0) {
     currentSong = playlist.length - 1;
   }
-  loadSong(currentSong);
+
+  loadSong(currentSong); // load new song
 }
+
+
+/* ================= EXTRA DOM MANIPULATION ================= */
+
+// Change title dynamically
+title.innerText = "Sri Anjaneyam";
+
+// Change style using JS
+title.style.color = "red";
+
+// Change audio manually
+audio.src = "tibet.mp3";
+
+
+/* ================= EVENT LISTENER ================= */
+
+// Add click event to button
+button.addEventListener("click", toggleSong);
+
+
+/* ================= CONSOLE (FOR DEBUGGING) ================= */
+
+console.log(websiteName);
+console.log(songName);
+console.log(price);
+console.log(isUserLoggedIn);
+console.log(playlist);
