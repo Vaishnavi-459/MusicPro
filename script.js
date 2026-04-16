@@ -123,16 +123,6 @@ function highlightCard(index) {
 /* ================= EXTRA DOM ELEMENTS ================= */
 // progress bar
 const progress = document.getElementById("progress");
-// volume control
-const volume = document.getElementById("volume");
-// favorite button
-const favBtn = document.getElementById("fav-btn");
-
-audio.addEventListener("ended", function () {
-  nextSong(); // go to next automatically
-});
-
-/* ================= AUTO NEXT SONG ================= */
 // event → when song ends
 // update progress while song plays
 audio.addEventListener("timeupdate", function () {
@@ -145,21 +135,30 @@ progress.addEventListener("input", function () {
   audio.currentTime = (progress.value / 100) * audio.duration;
 });
 
-/* ================= VOLUME CONTROL ================= */
+// volume control
+const volume = document.getElementById("volume");
 // change volume when slider moves
 volume.addEventListener("input", function () {
-  audio.volume = volume.value;
+  audio.volume = volume.value;//set volume
 });
+
+/* ================= AUTO NEXT SONG ================= */
+audio.addEventListener("ended", function () {
+  nextSong(); // go to next automatically
+});
+
 
 /* ================= FAVORITE SONG ================= */
 // store favorite songs
 let favorites = [];
+// favorite button
+const favBtn = document.getElementById("fav-btn");
 
 favBtn.addEventListener("click", function () {
-  const song = playlist[currentSong];
+  const song = playlist[currentSong];//current song
   // check if already added
   const exists = favorites.find((s) => s.title === song.title);
-
+  // check if already exists
   if (exists) {
     // remove from favorites
     favorites = favorites.filter((s) => s.title !== song.title);
@@ -183,25 +182,9 @@ function toggleLogin() {
 }
 
 let isLoggedIn = false; // user state
-function handleLogin() {
-  const btn = document.getElementById("login-btn");
-  if (!isLoggedIn) {
-    isLoggedIn = true;
-    btn.innerText = "Logout";
-    alert("Logged in successfully");
-  } else {
-    isLoggedIn = false;
-    btn.innerText = "Login";
-    alert("Logged out");
-  }
-}
-
-const form = document.querySelector("form");
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault(); // stop page refresh
-
-  const email = document.getElementById("email").value;
+function handleLogin(e) {
+   e.preventDefault(); // 🚀 stops page reload
+ const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   // condition checks
@@ -219,6 +202,20 @@ form.addEventListener("submit", function (e) {
     alert("Password must be 6+ characters ❌");
     return;
   }
+  isLoggedIn = true; // ✅ user logged in
+  document.getElementById("login-btn").innerText = "Logout";
 
   alert("Login successful ✅");
+}
+/* ================= DARK / LIGHT THEME (JS) ================= */
+
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("change", function () {
+
+  if (themeToggle.checked) {
+    document.body.classList.add("dark"); // apply dark
+  } else {
+    document.body.classList.remove("dark"); // remove dark
+  }
 });

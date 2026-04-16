@@ -13,7 +13,7 @@
     <!-- checkbox used for dark/light toggle (hidden from UI) -->
     <input type="checkbox" id="theme-toggle" hidden />
 
-    <div class="app-container"><!-- wrapper div → controls full layout -->
+    <div class="app-container"><!-- wrapper div → controls full layout&theme control -->
       <header>
         <h1>Melomaniac</h1> <!-- main heading -->
         <p>Ur Music Destination</p><!-- tagline -->
@@ -27,7 +27,7 @@
           <li><a href="#videos">Videos</a></li>
           <li><a href="#login">Login</a></li>
         </ul>
- <!-- label triggers checkbox click (used for theme toggle) -->
+ <!-- label connects to checkbox  (used as  toggle button) -->
         <label for="theme-toggle" class="toggle-btn"></label>
       </nav>
 
@@ -80,6 +80,7 @@
         </div>
       </section>
 
+      <!-- STATIC CONTENT -->
       <section>
         <h2>Top Songs</h2>
         <ol>
@@ -95,10 +96,11 @@
           <li>Hindi Songs</li>
         </ul>
       </section>
-
+      
+      <!-- LOGIN SECTION -->
       <section id="login-section">
         <h2>Login</h2>
-        <form action=""> <!-- form submission -->
+        <form onsubmit="handleLogin(event)"> <!-- form submission -->
           <div>
             <label for="email">Email:</label><br /> <!-- label connects to input -->
             <input type="email" id="email" name="email" required /> <!-- label connects to input -->
@@ -108,7 +110,7 @@
             <input type="password" id="password" name="password" required />
           </div>
           <br />
-          <button onclick="handleLogin()" id="login-btn">Login</button>
+          <button type="submit"  id="login-btn">Login</button>
         </form>
       </section>
 
