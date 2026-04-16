@@ -76,7 +76,7 @@ img {
 */
 /* ========================================================= */
 
- /* ===VARIABLES [before not applied dark theme]==== */ /* :root { */ /* --primary: #6c63ff; main brand color (used for header, buttons) */ /* --secondary: #4caf50; secondary color (optional usage) */ /* --dark: #222; dark text color */ /* --light: #f4f4f4; background color */ /* } */ /* ================= THEME VARIABLES ================= */ /* LIGHT THEME (DEFAULT) */
+/* ===VARIABLES [before not applied dark theme]==== */ /* :root { */ /* --primary: #6c63ff; main brand color (used for header, buttons) */ /* --secondary: #4caf50; secondary color (optional usage) */ /* --dark: #222; dark text color */ /* --light: #f4f4f4; background color */ /* } */ /* ================= THEME VARIABLES ================= */ /* LIGHT THEME (DEFAULT) */
 :root {
   --primary: #6c63ff; /* --secondary:#4CAF50; */
   --dark: #222; /* text color */
@@ -92,13 +92,13 @@ body.dark {
   --card:#1e1e1e;
 }
 */
- /* When checkbox checked → apply dark theme */
- #theme-toggle:checked ~ .app-container {
+/* When checkbox checked → apply dark theme */
+#theme-toggle:checked ~ .app-container {
   --primary: #8e85ff;
   --dark: #f4f4f4; /* Dark mode text */
   --light: #121212; /* Dark mode background */
   --card: #1e1e1e; /* Dark mode cards */
-} 
+}
 /* DARK THEME (MANUAL TOGGLE) body.dark { --primary:#8e85ff; --secondary:#4CAF50; --dark:#f4f4f4; /*text becomes light*/ /* --light:#121212; dark background */ /* --card:#1e1e1e; dark card */ /* } */ /* AUTO DARK MODE (SYSTEM BASED) */
 @media (prefers-color-scheme: dark) {
   body:not(.light) {
@@ -107,7 +107,7 @@ body.dark {
     --light: #121212;
     --card: #1e1e1e;
   }
-} 
+}
 /* ================= BODY ================= */
 body {
   margin: 0;
@@ -123,26 +123,26 @@ body {
   color: var(--dark);
   min-height: 100vh;
   transition: 0.3s ease; /* Smooth transition for everything */
-} 
+}
 /* ================= 2. CORRECT ICON LOGIC ================= */ /* Default (Light Mode) -> Show Moon */
 .toggle-btn::before {
   content: "☀️";
   font-size: 1.5rem;
   cursor: pointer;
-} 
+}
 /* ================= ICON SWAP ================= */ /* Show Sun when dark mode is on */
 #theme-toggle:checked ~ .app-container .toggle-btn::before {
   content: "🌙";
 }
- /* Hide the default moon when sun is shown */
+/* Hide the default moon when sun is shown */
 #theme-toggle:checked ~ .app-container .toggle-btn {
   font-size: 0; /* hides the text moon */
 }
 #theme-toggle:checked ~ .app-container .toggle-btn::before {
   font-size: 1.5rem; /* shows the emoji sun */
 }
- /* --- THEME OVERRIDES FOR HEADER & HERO --- */ 
- /* When Dark Mode is ON... (Darkmode header override*/
+/* --- THEME OVERRIDES FOR HEADER & HERO --- */
+/* When Dark Mode is ON... (Darkmode header override*/
 #theme-toggle:checked ~ .app-container header {
   background: #1a1a1a; /* Darker header background */ /* border-bottom: 1px solid var(--primary); Optional accent line */
 }
@@ -154,7 +154,7 @@ body {
     #1a1a1a
   ); /* color: var(--dark); Ensures text is visible */
 }
- /* ================= HEADER ================= */
+/* ================= HEADER ================= */
 header {
   background: var(--primary);
   color: white;
@@ -162,7 +162,7 @@ header {
   padding: 25px;
   transition: 0.3s;
 }
- /* ================= NAVBAR ================= */
+/* ================= NAVBAR ================= */
 nav {
   background: var(--card); /* dynamic */
   padding: 15px 30px; /* spacing inside navbar */
@@ -170,20 +170,20 @@ nav {
   justify-content: space-between; /* space between logo & menu */
   align-items: center; /* vertically align items */
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
-} 
+}
 /* ================= NAV LIST ================= */
 nav ul {
   display: flex; /* horizontal menu */
   list-style: none; /* remove bullets */
   gap: 25px; /* space between menu items */
-} 
+}
 /* ================= NAV LINKS ================= */
 nav a {
   text-decoration: none; /* remove underline */
   color: var(--dark); /* text color */
   font-weight: 600; /* slightly bold */
   position: relative; /* required for underline animation */
-} 
+}
 /* ================= NAV HOVER UNDERLINE ================= */
 nav a::after {
   content: ""; /* empty element */
@@ -197,7 +197,7 @@ nav a::after {
 }
 nav a:hover::after {
   width: 100%; /* expand line on hover */
-} 
+}
 /* ================= HERO ================= */ /* FLEXBOX WAY (OLD) */ /* #home { display: flex; justify-content: center; align-items: center; } */ /* GRID WAY (NEW) */ /* --- ENSURE THE HERO SECTION ADAPTS --- */
 #home {
   display: grid;
@@ -207,19 +207,19 @@ nav a:hover::after {
   color: white;
   text-align: center;
   transition: 0.3s; /* Smooth color swap */
-} 
+}
 /* ================= SECTIONS ================= */
 section {
   padding: 50px 20px; /* spacing inside sections */
   max-width: 1100px; /* max width */
   margin: auto; /* center section */
-} 
+}
 /* ================= SECTION HEADINGS ================= */
 section h2 {
   text-align: center;
   margin-bottom: 30px; /* space below heading */
 }
- /* ================= MUSIC CONTAINER ================= */ /* FLEXBOX WAY (OLD) */ /* .music-container { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; } */ /* GRID WAY (NEW) */
+/* ================= MUSIC CONTAINER ================= */ /* FLEXBOX WAY (OLD) */ /* .music-container { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; } */ /* GRID WAY (NEW) */
 .music-container {
   display: grid; /* grid layout */
   grid-template-columns: repeat(
@@ -227,7 +227,7 @@ section h2 {
     minmax(250px, 1fr)
   ); /* auto-fit → automatic columns minmax → min 250px, max flexible */
   gap: 25px; /* spacing between cards */
-} 
+}
 /* ================= MUSIC CARD ================= */
 .music-card {
   background: var(--card); /* works in both modes */
@@ -235,29 +235,34 @@ section h2 {
   border-radius: 12px; /* rounded corners */
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* shadow */
   transition: 0.3s; /* smooth animation */
-} 
+}
 /* ================= CARD HOVER ================= */
 .music-card:hover {
   transform: translateY(-8px); /* move up */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* deeper shadow */
-} 
+}
 /* ================= IMAGE ================= */
 .music-card img {
   width: 100%; /* full width */
   border-radius: 8px; /* rounded image */
-} 
+}
+.music-card.active {
+  border: 2px solid var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
 /* ================= MEDIA ================= */
 audio,
 video {
   width: 100%; /* full width responsive */
   margin-top: 10px; /* spacing above */
 }
- /* ================= LISTS ================= */
+/* ================= LISTS ================= */
 ol,
 ul {
   margin-top: 10px; /* spacing */
 }
- /* ================= FORM ================= */
+/* ================= FORM ================= */
 form {
   background: var(--card);
   padding: 25px;
@@ -268,13 +273,13 @@ form {
   display: flex;
   flex-direction: column; /* vertical layout */
   gap: 10px; /* spacing between elements */
-} 
+}
 /* ================= INPUT ================= */
 input {
   background: var(--card);
   color: var(--dark);
   border: 1px solid var(--primary);
-} 
+}
 /* ================= INPUT FOCUS ================= */
 input:focus {
   border-color: var(--primary); /* highlight border */

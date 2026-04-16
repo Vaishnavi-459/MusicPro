@@ -1,31 +1,33 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
+<!doctype html><!-- tells browser this is HTML5 document -->
+<html><!-- root element (everything inside webpage) -->
+  <head> <!-- metadata (not visible on page) -->
+    <meta charset="UTF-8" /><!-- character encoding → supports all languages -->
+ <!-- responsive design → adjusts layout on mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Melomaniac</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Melomaniac</title> <!-- title shown in browser tab -->
+    <link rel="stylesheet" href="style.css" /> <!-- link external CSS file -->
   </head>
 
   <!-- <body class="dark">add/remove "dark" to switch -->
-  <body>
+  <body><!-- visible content starts -->
+    <!-- checkbox used for dark/light toggle (hidden from UI) -->
     <input type="checkbox" id="theme-toggle" hidden />
 
-    <div class="app-container">
+    <div class="app-container"><!-- wrapper div → controls full layout -->
       <header>
-        <h1>Melomaniac</h1>
-        <p>Ur Music Destination</p>
+        <h1>Melomaniac</h1> <!-- main heading -->
+        <p>Ur Music Destination</p><!-- tagline -->
       </header>
 
       <!-- Navigation -->
       <nav>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#popular">Music</a></li>
+          <li><a href="#">Home</a></li><!-- # means current page -->
+          <li><a href="#popular">Music</a></li> <!-- scroll to section -->
           <li><a href="#videos">Videos</a></li>
           <li><a href="#login">Login</a></li>
         </ul>
-
+ <!-- label triggers checkbox click (used for theme toggle) -->
         <label for="theme-toggle" class="toggle-btn"></label>
       </nav>
 
@@ -37,33 +39,32 @@
 
       <section id="popular">
         <h2>Popular Songs</h2>
-        <div class="music-container">
-          <article class="music-card">
-            <h3>Gayatri Mantra...</h3>
+        <div class="music-container"><!-- container for cards -->
+          <article class="music-card" data-index="0"> <!-- data-index → custom attribute used in JS -->
+            <h3>Gayatri Mantra</h3>
           </article>
-          <article class="music-card">
+          <article class="music-card" data-index="1">
             <h3>Om Namah Shiva</h3>
-            <img
-              src="lord shiva.jpeg"
-              alt="Lord Shiva Song Image"
-              width="100"
-            />
+            <img src="lord shiva.jpeg" /><!-- image displayed inside card -->
           </article>
-          <article class="music-card">
-            <h3 id="song-title">Lord Buddha Song</h3>
-            <audio id="audio-player" controls>
-              <source src="tibet.mp3" type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
+
+          <!-- MAIN PLAYER CARD -->
+          <article class="music-card player-card">
+             <!-- dynamic title updated using JS -->
+            <h3 id="song-title">Select a Song</h3>
+             <!-- audio player controlled by JS -->
+            <audio id="audio-player"></audio>
             <!-- <button onClick="playSong">▶ Play</button>
             <button onclick="pauseSong">⏸Pause</button> -->
-            <button onclick="prevSong()">⏮ </button>
-            <button onclick="toggleSong()">▶</button>
-            <button onclick="nextSong()">⏭</button>
+            <div>
+              <button onclick="prevSong()">⏮</button> <!-- calls prevSong() on click -->
+              <button onclick="toggleSong()" id="play-btn">▶</button><!-- play/pause button -->
+              <button onclick="nextSong()">⏭</button><!-- next song -->
+            </div>
           </article>
           <article class="music-card">
             <h3>Nature</h3>
-            <video controls>
+            <video controls> <!-- controls → play/pause UI -->
               <source src="nature.mp4" type="video/mp4" />
               Your browser does not support the video element.
             </video>
@@ -89,10 +90,10 @@
 
       <section id="login">
         <h2>Login</h2>
-        <form action="">
+        <form action=""> <!-- form submission -->
           <div>
-            <label for="email">Email:</label><br />
-            <input type="email" id="email" name="email" required />
+            <label for="email">Email:</label><br /> <!-- label connects to input -->
+            <input type="email" id="email" name="email" required /> <!-- label connects to input -->
           </div>
           <div>
             <label for="password">Password:</label><br />
