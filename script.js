@@ -1,13 +1,12 @@
 /* ================= VARIABLES & DATA TYPES ================= */
 // let → variable (value can change)
-let websiteName = "Melomaniac";//string
+let websiteName = "Melomaniac"; //string
 
 let songName = "Gayatri Mantra..";
 songName = "Kanchi.. Kamakshi.. Amba.."; // reassigned
 
-let price = 800;// Number → numeric value
-
-let isUserLoggedIn = false;// Boolean → true/false
+let price = 800; // Number → numeric value
+let isUserLoggedIn = false; // Boolean → true/false (user login state)
 
 /* ================= ARRAY OF OBJECTS (PLAYLIST) ================= */
 // Array → collection of items
@@ -27,7 +26,7 @@ let playlist = [
   },
 ];
 
-// Track current song index
+//currentSong → stores index of current playing song(Track current song index)
 let currentSong = 0;
 
 /* ================= DOM SELECTION ================= */
@@ -44,28 +43,32 @@ const cards = document.querySelectorAll(".music-card[data-index]");
 /* ================= FUNCTION → LOAD SONG ================= */
 // Function → reusable block of code
 function loadSong(index) {
-  currentSong = index;// update current song
+  currentSong = index; // update current song
   // update audio source
   audio.src = playlist[index].file;
-  // update title text
+  // update UI text
   title.innerText = playlist[index].title;
 
   // audio.play(); //auto play
-  playBtn.innerText = "▶";//update button
-  highlightCard(index);
+  playBtn.innerText = "▶"; //update button
+  highlightCard(index);// highlight selected card
 }
 
 /* ================= FUNCTION → PLAY / PAUSE ================= */
 function toggleSong() {
+  if (!isLoggedIn) {
+    alert("Please login first ❌");
+    return; // stop function
+  }
   //audio.paused → true if paused(check if audio is paused)
   if (audio.paused) {
     audio.play(); // start playing
     // change button text
-    playBtn.innerText = "⏸";
+    playBtn.innerText = "⏸";// update button
   } else {
     audio.pause(); // stop playing
     // change button text
-    playBtn.innerText = "▶";
+    playBtn.innerText = "▶";// update button
   }
 }
 
@@ -75,7 +78,7 @@ function nextSong() {
 
   // if reached end → go to first song
   if (currentSong >= playlist.length) {
-    currentSong = 0;
+    currentSong = 0;// loop to first
   }
   loadSong(currentSong); // load new song
 }
@@ -86,28 +89,28 @@ function prevSong() {
 
   // if below 0 → go to last song
   if (currentSong < 0) {
-    currentSong = playlist.length - 1;
+    currentSong = playlist.length - 1;// go to last
   }
   loadSong(currentSong); // load new song
 }
 
 cards.forEach((card) => {
-   // add click event
-  card.addEventListener("click", () => {
-     // get data-index value
-    const index = card.getAttribute("data-index");
-    loadSong(index);// load that song
+  // add click event
+  card.addEventListener("click", function () {
+    //getAttribute() returns STRING, but array needs NUMBER
+    const index = Number(card.getAttribute("data-index")); // convert string → number
+    loadSong(index);  // load clicked song
   });
 });
 
 /* ================= ACTIVE CARD UI ================= */
 function highlightCard(index) {
-   // remove active class from all
+  // remove active class from all
   cards.forEach((card) => {
-    card.classList.remove("active");
+    card.classList.remove("active");// remove highlight
   });
-    // add active class to clicked
-  cards[index].classList.add("active");
+  // add active class to clicked
+  cards[index].classList.add("active");// add highlight
 }
 // /* ================= EXTRA DOM MANIPULATION ================= */
 // title.innerText = "Sri Anjaneyam";// Change title dynamically
@@ -167,4 +170,55 @@ favBtn.addEventListener("click", function () {
     favBtn.innerText = "❤️"; // filled heart
   }
   console.log("Favorites:", favorites);
+});
+
+/* ================= SHOW / HIDE LOGIN ================= */
+const loginSection = document.getElementById("login-section");
+function toggleLogin() {
+  if (loginSection.style.display === "none") {
+    loginSection.style.display = "block"; // show
+  } else {
+    loginSection.style.display = "none"; // hide
+  }
+}
+
+let isLoggedIn = false; // user state
+function handleLogin() {
+  const btn = document.getElementById("login-btn");
+  if (!isLoggedIn) {
+    isLoggedIn = true;
+    btn.innerText = "Logout";
+    alert("Logged in successfully");
+  } else {
+    isLoggedIn = false;
+    btn.innerText = "Login";
+    alert("Logged out");
+  }
+}
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault(); // stop page refresh
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  // condition checks
+  if (email === "" || password === "") {
+    alert("All fields are required ❌");
+    return;
+  }
+
+  if (!email.includes("@")) {
+    alert("Invalid email ❌");
+    return;
+  }
+
+  if (password.length < 6) {
+    alert("Password must be 6+ characters ❌");
+    return;
+  }
+
+  alert("Login successful ✅");
 });
