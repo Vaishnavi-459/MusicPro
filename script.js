@@ -109,7 +109,6 @@ function highlightCard(index) {
     // add active class to clicked
   cards[index].classList.add("active");
 }
-
 // /* ================= EXTRA DOM MANIPULATION ================= */
 // title.innerText = "Sri Anjaneyam";// Change title dynamically
 // title.style.color = "red";// Change style using JS
@@ -117,3 +116,55 @@ function highlightCard(index) {
 // button.addEventListener("click", toggleSong);//EVENT LISTENER----Add click event to button
 // /* ================= CONSOLE (FOR DEBUGGING) ================= */
 // console.log(websiteName);
+
+/* ================= EXTRA DOM ELEMENTS ================= */
+// progress bar
+const progress = document.getElementById("progress");
+// volume control
+const volume = document.getElementById("volume");
+// favorite button
+const favBtn = document.getElementById("fav-btn");
+
+audio.addEventListener("ended", function () {
+  nextSong(); // go to next automatically
+});
+
+/* ================= AUTO NEXT SONG ================= */
+// event → when song ends
+// update progress while song plays
+audio.addEventListener("timeupdate", function () {
+  // current time / total duration
+  progress.value = (audio.currentTime / audio.duration) * 100;
+});
+
+// when user drags progress → change song time
+progress.addEventListener("input", function () {
+  audio.currentTime = (progress.value / 100) * audio.duration;
+});
+
+/* ================= VOLUME CONTROL ================= */
+// change volume when slider moves
+volume.addEventListener("input", function () {
+  audio.volume = volume.value;
+});
+
+/* ================= FAVORITE SONG ================= */
+// store favorite songs
+let favorites = [];
+
+favBtn.addEventListener("click", function () {
+  const song = playlist[currentSong];
+  // check if already added
+  const exists = favorites.find((s) => s.title === song.title);
+
+  if (exists) {
+    // remove from favorites
+    favorites = favorites.filter((s) => s.title !== song.title);
+    favBtn.innerText = "🤍"; // empty heart
+  } else {
+    // add to favorites
+    favorites.push(song);
+    favBtn.innerText = "❤️"; // filled heart
+  }
+  console.log("Favorites:", favorites);
+});
