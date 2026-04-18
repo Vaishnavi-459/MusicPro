@@ -338,3 +338,13 @@ footer {
     justify-content: space-evenly; /* better spacing */
   }
 }
+
+.warning-box {
+  display: none;
+  background: #ffdddd;
+  color: red;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  border: 1px solid red;
+}

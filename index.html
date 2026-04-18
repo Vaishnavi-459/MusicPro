@@ -1,43 +1,44 @@
-<!doctype html>
 <!-- tells browser this is HTML5 document -->
+<!doctype html>
+<!-- root element (everything inside webpage) -->
 <html>
-  <!-- root element (everything inside webpage) -->
+  <!-- metadata (not visible on page) -->
   <head>
-    <!-- metadata (not visible on page) -->
-    <meta charset="UTF-8" />
     <!-- character encoding → supports all languages -->
+    <meta charset="UTF-8" />
     <!-- responsive design → adjusts layout on mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Melomaniac</title>
     <!-- title shown in browser tab -->
-    <link rel="stylesheet" href="style.css" />
+    <title>Melomaniac</title>
     <!-- link external CSS file -->
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <!-- <body class="dark">add/remove "dark" to switch -->
+  <!-- visible content starts -->
   <body>
-    <!-- visible content starts -->
     <!-- checkbox used for dark/light toggle (hidden from UI) -->
     <input type="checkbox" id="theme-toggle" hidden />
-
+    <!-- wrapper div → controls full layout&theme control -->
     <div class="app-container">
-      <!-- wrapper div → controls full layout&theme control -->
       <header>
-        <h1>Melomaniac</h1>
         <!-- main heading -->
-        <p>Ur Music Destination</p>
+        <h1>Melomaniac</h1>
         <!-- tagline -->
+        <p>Ur Music Destination</p>
+        <p id="welcome-msg"></p>
       </header>
 
       <!-- Navigation -->
       <nav>
         <ul>
-          <li><a href="#">Home</a></li>
           <!-- # means current page -->
-          <li><a href="#popular">Music</a></li>
+          <li><a href="#">Home</a></li>
           <!-- scroll to section -->
+          <li><a href="#popular">Music</a></li>
+
           <li><a href="#videos">Videos</a></li>
-          <li><a href="#login">Login</a></li>
+          <li><a href="#" onclick="toggleLogin()">Login</a></li>
         </ul>
         <!-- label connects to checkbox  (used as  toggle button) -->
         <label for="theme-toggle" class="toggle-btn"></label>
@@ -51,10 +52,11 @@
 
       <section id="popular">
         <h2>Popular Songs</h2>
+        <!-- container for cards -->
         <div class="music-container">
-          <!-- container for cards -->
+          <!-- data-index → custom attribute used in JS -->
+
           <article class="music-card" data-index="0">
-            <!-- data-index → custom attribute used in JS -->
             <h3>Gayatri Mantra</h3>
           </article>
           <article class="music-card" data-index="1">
@@ -71,12 +73,13 @@
             <!-- <button onClick="playSong">▶ Play</button>
             <button onclick="pauseSong">⏸Pause</button> -->
             <div>
-              <button onclick="prevSong()">⏮</button>
               <!-- calls prevSong() on click -->
+              <button onclick="prevSong()">⏮</button>
+
               <button onclick="toggleSong()" id="play-btn">▶</button
               ><!-- play/pause button -->
-              <button onclick="nextSong()">⏭</button
-              ><!-- next song -->
+              <!-- next song -->
+              <button onclick="nextSong()">⏭</button>
             </div>
             <!-- PROGRESS BAR -->
             <input type="range" id="progress" value="0" />
@@ -94,13 +97,20 @@
             <!-- FAVORITE BUTTON -->
             <button id="fav-btn">🤍</button>
           </article>
+
+          <h3>Upload Your Music</h3>
+
+
+
           <article class="music-card">
             <h3>Nature</h3>
+            <!-- controls → play/pause UI -->
             <video controls>
-              <!-- controls → play/pause UI -->
               <source src="nature.mp4" type="video/mp4" />
               Your browser does not support the video element.
             </video>
+            <input type="file" id="file-upload" accept="audio/*,video/*" />
+<button onclick="uploadFile()">Upload</button>
           </article>
         </div>
       </section>
@@ -122,16 +132,20 @@
         </ul>
       </section>
 
+      <div id="login-warning" class="warning-box">
+        ⚠ Please login to play music
+      </div>
+
       <!-- LOGIN SECTION -->
       <section id="login-section">
         <h2>Login</h2>
+        <!-- form submission -->
         <form onsubmit="handleLogin(event)">
-          <!-- form submission -->
           <div>
+            <!-- label connects to input -->
             <label for="email">Email:</label><br />
             <!-- label connects to input -->
             <input type="email" id="email" name="email" required />
-            <!-- label connects to input -->
           </div>
           <div>
             <label for="password">Password:</label><br />
